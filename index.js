@@ -3,9 +3,7 @@ const inquirer = require("inquirer");
 const db = require("./db");
 require("console.table");
 
-//create a fn to init, create a prompt, then type name list, then .then to do a switch, default for quit function
-
-const promptQuestions = [
+const promptQuestions = (
   {
     type: "list",
     name: "startPrompt",
@@ -19,16 +17,28 @@ const promptQuestions = [
         name: "Add a Department",
         value: "add_dept",
       },
-
-      // "View All Roles",
-      // "View All Employees",
-
-      // "Add a Role",
-      // "Add an Employee",
-      // "Update Employee Role",
+      {
+        name: "View All Roles",
+        value: "view_roles",
+      },
+      {
+        name: "View All Employees",
+        value: "view_employees",
+      },
+      {
+        name: "Add a Role",
+        value: "add_role",
+      },
+      {
+        name: "Add an Employee",
+        value: "add_employee",
+      },
+      {
+        name: "Update Employee Role",
+        value: "update_employee",
+      },
     ],
-  },
-];
+  });
 
 // const allDepartments =
 
@@ -103,14 +113,13 @@ const init = function () {
 };
 
 function viewDepartments() {
-  // console.log('Hi hello')
   db.findDepartments()
     .then(([rows]) => {
       let departments = rows;
       console.table(departments);
-      // init();
     })
     .then(() => init());
 }
 
 init();
+  
