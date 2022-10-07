@@ -20,11 +20,11 @@ VALUES
     ('Special Advisor', 220000, 6);
 
 INSERT INTO employee 
-    (first_name, last_name, role_id, manager_id)
+    (id, first_name, last_name, role_id, manager_id)
 VALUES
-    ('Kingsley', 'Shacklebolt', 1, 654),
-    ('Ludovic', 'Bagman', 2, 543),
-    ('John', 'Dawlish', 3, 432),
-    ('Arnold', 'Peasegood', 4, 321),
-    ('Arthur', 'Weasley', 5, 210),
-    ('Cornelius', 'Fudge', 6, 109);
+    (1, 'Kingsley', 'Shacklebolt', 1, null),
+    (2, 'Ludovic', 'Bagman', 2, 2),
+    (3, 'John', 'Dawlish', 3, 1),
+    (4, 'Arnold', 'Peasegood', 4, 4),
+    (5, 'Arthur', 'Weasley', 5, 3),
+    (6, 'Cornelius', 'Fudge', 6, 2);

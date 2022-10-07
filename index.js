@@ -1,6 +1,4 @@
-// error in seeds file
-// add functions
-// view roles viewing departments
+// TO DO: add dept, add role, add employee, update employee
 
 const fs = require("fs");
 const inquirer = require("inquirer");
@@ -17,10 +15,10 @@ const promptQuestions = {
       name: "View All Departments",
       value: "view_dept",
     },
-    // {
-    //   name: "Add a Department",
-    //   value: "add_dept",
-    // },
+    {
+      name: "Add a Department",
+      value: "add_dept",
+    },
     {
       name: "View All Roles",
       value: "view_roles",
@@ -29,18 +27,18 @@ const promptQuestions = {
       name: "View All Employees",
       value: "view_employees",
     },
-    // {
-    //   name: "Add a Role",
-    //   value: "add_role",
-    // },
-    // {
-    //   name: "Add an Employee",
-    //   value: "add_employee",
-    // },
-    // {
-    //   name: "Update Employee Role",
-    //   value: "update_employee",
-    // },
+    {
+      name: "Add a Role",
+      value: "add_role",
+    },
+    {
+      name: "Add an Employee",
+      value: "add_employee",
+    },
+    {
+      name: "Update Employee Role",
+      value: "update_employee",
+    },
     {
       name: "EXIT",
       value: "exit_app",
@@ -56,53 +54,53 @@ const promptQuestions = {
 
 
 // Add Department Questions
-const addDepartment = [
+const departmentQ = [
   {
     type: "input",
-    name: "addDepartment",
+    name: "name",
     message: "What is the department's name?",
   },
 ];
 
 // Add Role Questions
-const addRole = [
+const roleQ = [
   {
     type: "input",
-    name: "addName",
+    name: "title",
     message: "What is the name of the new role?",
   },
   {
     type: "input",
-    name: "addSalary",
+    name: "salary",
     message: "What is the salary of the new role?",
   },
   {
     type: "input",
-    name: "addDepart",
+    name: "department_id",
     message: "What is the department of the new role?",
   },
 ];
 
 // Add employee questions
-const addEmployee = [
+const employeeQ = [
   {
     type: "input",
-    name: "addFirstName",
+    // name: "addFirstName",
     message: "What is the employee's first name?",
   },
   {
     type: "input",
-    name: "addLastName",
+    // name: "addLastName",
     message: "What is the employee's last name?",
   },
   {
     type: "input",
-    name: "addRole",
+    // name: "addRole",
     message: "What is the employee's role?",
   },
   {
     type: "input",
-    name: "addManager",
+    // name: "addManager",
     message: "Who is the employee's manager?",
   },
 ];
@@ -136,11 +134,11 @@ const init = function () {
         break;
       case "EXIT":
         exitApp();
-        break;
+        return;
       default:
         process.exit();
     }
-  });
+  })
 };
 
 // View all Departments 
@@ -150,7 +148,13 @@ function viewDepartments() {
       let departments = rows;
       console.table(departments);
     })
-    .then(() => connection.end());
+}
+
+// Add a Department
+function addDepartment() {
+  inquirer.prompt(departmentQ).then((data) => {
+    db.addDepartments(data)
+  })
 }
 
 // View all Roles
@@ -160,17 +164,15 @@ function viewRoles() {
       let roles = rows;
       console.table(roles);
     })
-    .then(() => connection.end());
 }
 
 // View all Employees
 function viewEmployees() {
   db.findEmployees()
     .then(([rows]) => {
-      let roles = rows;
+      let employees = rows;
       console.table(employees);
     })
-    .then(() => connection.end());
 }
 
 // Exit function
