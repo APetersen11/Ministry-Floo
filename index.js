@@ -1,55 +1,52 @@
 // error in seeds file
-// looping through questions
 // add functions
 // view roles viewing departments
-// git fail 
-
 
 const fs = require("fs");
 const inquirer = require("inquirer");
+const { connection } = require("./db");
 const db = require("./db");
 require("console.table");
 
-const promptQuestions = (
-  {
-    type: "list",
-    name: "startPrompt",
-    message: "What would you like to do?",
-    choices: [
-      {
-        name: "View All Departments",
-        value: "view_dept",
-      },
-      {
-        name: "Add a Department",
-        value: "add_dept",
-      },
-      {
-        name: "View All Roles",
-        value: "view_roles",
-      },
-      {
-        name: "View All Employees",
-        value: "view_employees",
-      },
-      {
-        name: "Add a Role",
-        value: "add_role",
-      },
-      {
-        name: "Add an Employee",
-        value: "add_employee",
-      },
-      {
-        name: "Update Employee Role",
-        value: "update_employee",
-      },
-      {
-        name: "EXIT",
-        value: "exit_app",
-      },
-    ],
-  });
+const promptQuestions = {
+  type: "list",
+  name: "startPrompt",
+  message: "What would you like to do?",
+  choices: [
+    {
+      name: "View All Departments",
+      value: "view_dept",
+    },
+    // {
+    //   name: "Add a Department",
+    //   value: "add_dept",
+    // },
+    {
+      name: "View All Roles",
+      value: "view_roles",
+    },
+    {
+      name: "View All Employees",
+      value: "view_employees",
+    },
+    // {
+    //   name: "Add a Role",
+    //   value: "add_role",
+    // },
+    // {
+    //   name: "Add an Employee",
+    //   value: "add_employee",
+    // },
+    // {
+    //   name: "Update Employee Role",
+    //   value: "update_employee",
+    // },
+    {
+      name: "EXIT",
+      value: "exit_app",
+    },
+  ],
+};
 
 // const allDepartments =
 
@@ -57,6 +54,8 @@ const promptQuestions = (
 
 // const allEmployees=
 
+
+// Add Department Questions
 const addDepartment = [
   {
     type: "input",
@@ -65,6 +64,7 @@ const addDepartment = [
   },
 ];
 
+// Add Role Questions
 const addRole = [
   {
     type: "input",
@@ -83,6 +83,7 @@ const addRole = [
   },
 ];
 
+// Add employee questions
 const addEmployee = [
   {
     type: "input",
@@ -108,6 +109,7 @@ const addEmployee = [
 
 // const updateEmployee=
 
+// Start application
 const init = function () {
   inquirer.prompt(promptQuestions).then((data) => {
     switch (data.startPrompt) {
@@ -141,26 +143,44 @@ const init = function () {
   });
 };
 
+// View all Departments 
 function viewDepartments() {
   db.findDepartments()
     .then(([rows]) => {
       let departments = rows;
       console.table(departments);
     })
-    .then(() => init());
+    .then(() => connection.end());
 }
+
+// View all Roles
 function viewRoles() {
   db.findRoles()
-  .then(([rows]) => {
-    let roles = rows;
-    console.table(roles);
-  })
-  .then(() => init());
+    .then(([rows]) => {
+      let roles = rows;
+      console.table(roles);
+    })
+    .then(() => connection.end());
 }
 
+// View all Employees
+function viewEmployees() {
+  db.findEmployees()
+    .then(([rows]) => {
+      let roles = rows;
+      console.table(employees);
+    })
+    .then(() => connection.end());
+}
+
+// Exit function
 function exitApp() {
   connection.end();
-};
+}
 
+
+
+
+
+// app start
 init();
-  

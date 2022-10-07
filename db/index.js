@@ -10,7 +10,11 @@ class DB {
   }
 
   findRoles() {
-    return this.connection.promise().query("SELECT * FROM department");
+    return this.connection.promise().query("SELECT * FROM roles");
+  }
+
+  findEmployees() {
+    return this.connection.promise().query("SELECT * FROM employee");
   }
 }
 
