@@ -8,6 +8,10 @@ class DB {
   findDepartments() {
     return this.connection.promise().query("SELECT * FROM department");
   }
+
+  findRoles() {
+    return this.connection.promise().query("SELECT * FROM department");
+  }
 }
 
 module.exports = new DB(connection);

@@ -1,3 +1,9 @@
+// error in seeds file
+// looping through questions
+// add functions
+// view roles viewing departments
+
+
 const fs = require("fs");
 const inquirer = require("inquirer");
 const db = require("./db");
@@ -36,6 +42,10 @@ const promptQuestions = (
       {
         name: "Update Employee Role",
         value: "update_employee",
+      },
+      {
+        name: "EXIT",
+        value: "exit_app",
       },
     ],
   });
@@ -106,6 +116,24 @@ const init = function () {
       case "add_dept":
         addDepartment();
         break;
+      case "view_roles":
+        viewRoles();
+        break;
+      case "view_employees":
+        viewEmployees();
+        break;
+      case "add_role":
+        addRole();
+        break;
+      case "add_employee":
+        addEmployee();
+        break;
+      case "update_employee":
+        updateEmployee();
+        break;
+      case "EXIT":
+        exitApp();
+        break;
       default:
         process.exit();
     }
@@ -120,6 +148,18 @@ function viewDepartments() {
     })
     .then(() => init());
 }
+function viewRoles() {
+  db.findRoles()
+  .then(([rows]) => {
+    let roles = rows;
+    console.table(roles);
+  })
+  .then(() => init());
+}
+
+function exitApp() {
+  connection.end();
+};
 
 init();
   
