@@ -17,8 +17,18 @@ class DB {
     return this.connection.promise().query("SELECT * FROM employee");
   }
 
-  addDepartments(department){
-    return this.connection.promise().query("INSERT INTO department SET ?", department);
+  addDepartments(department) {
+    return this.connection
+      .promise()
+      .query("INSERT INTO department SET ?", department);
+  }
+
+  addRoles(roles) {
+    return this.connection.promise().query("INSERT INTO roles SET ?", roles);
+  }
+
+  addEmployee(employee) {
+    return this.connection.promise().query("INSERT INTO roles SET ?", employee);
   }
 }
 

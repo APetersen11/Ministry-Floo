@@ -46,13 +46,6 @@ const promptQuestions = {
   ],
 };
 
-// const allDepartments =
-
-// const allRoles =
-
-// const allEmployees=
-
-
 // Add Department Questions
 const departmentQ = [
   {
@@ -77,7 +70,7 @@ const roleQ = [
   {
     type: "input",
     name: "department_id",
-    message: "What is the department of the new role?",
+    message: "What is the department id of the new role?",
   },
 ];
 
@@ -85,27 +78,25 @@ const roleQ = [
 const employeeQ = [
   {
     type: "input",
-    // name: "addFirstName",
+    name: "first_name",
     message: "What is the employee's first name?",
   },
   {
     type: "input",
-    // name: "addLastName",
+    name: "las_name",
     message: "What is the employee's last name?",
   },
   {
     type: "input",
-    // name: "addRole",
-    message: "What is the employee's role?",
+    name: "role_id",
+    message: "What is the employee's role id?",
   },
   {
     type: "input",
-    // name: "addManager",
-    message: "Who is the employee's manager?",
+    name: "manager_id",
+    message: "What is the employee's manager's id?",
   },
 ];
-
-// const updateEmployee=
 
 // Start application
 const init = function () {
@@ -138,51 +129,58 @@ const init = function () {
       default:
         process.exit();
     }
-  })
+  });
 };
 
-// View all Departments 
+// View all Departments
 function viewDepartments() {
-  db.findDepartments()
-    .then(([rows]) => {
-      let departments = rows;
-      console.table(departments);
-    })
+  db.findDepartments().then(([rows]) => {
+    let departments = rows;
+    console.table(departments);
+  });
 }
 
 // Add a Department
 function addDepartment() {
   inquirer.prompt(departmentQ).then((data) => {
-    db.addDepartments(data)
-  })
+    db.addDepartments(data);
+  });
 }
 
 // View all Roles
 function viewRoles() {
-  db.findRoles()
-    .then(([rows]) => {
-      let roles = rows;
-      console.table(roles);
-    })
+  db.findRoles().then(([rows]) => {
+    let roles = rows;
+    console.table(roles);
+  });
+}
+
+// Add a Role
+function addRole() {
+  inquirer.prompt(roleQ).then((data) => {
+    db.addRoles(data);
+  });
 }
 
 // View all Employees
 function viewEmployees() {
-  db.findEmployees()
-    .then(([rows]) => {
-      let employees = rows;
-      console.table(employees);
-    })
+  db.findEmployees().then(([rows]) => {
+    let employees = rows;
+    console.table(employees);
+  });
+}
+
+// Add an Employee
+function addEmployee() {
+  inquirer.prompt(employeeQ).then((data) => {
+    db.addEmployee(data);
+  });
 }
 
 // Exit function
 function exitApp() {
   connection.end();
 }
-
-
-
-
 
 // app start
 init();
