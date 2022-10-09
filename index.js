@@ -70,7 +70,37 @@ const roleQ = [
   {
     type: "input",
     name: "department_id",
-    message: "What is the department id of the new role?",
+    message: "What department does the new role belong to?",
+    choices: [
+      {
+        name: "Magical Law Enforcement",
+        value: "1",
+      },
+      {
+        name: "Regulation and Control of Magical Creatures'",
+        value: "2",
+      },
+      {
+        name: "Magical Accidents and Catastrophes",
+        value: "3",
+      },
+      {
+        name: "International Magical Co-operation",
+        value: "4",
+      },
+      {
+        name: "Magical Transportation",
+        value: "5",
+      },
+      {
+        name: "Magical Games and Sports",
+        value: "6",
+      },
+      {
+        name: "Mysteries",
+        value: "7",
+      },
+    ],
   },
 ];
 
@@ -83,18 +113,18 @@ const employeeQ = [
   },
   {
     type: "input",
-    name: "las_name",
+    name: "last_name",
     message: "What is the employee's last name?",
   },
   {
     type: "input",
     name: "role_id",
-    message: "What is the employee's role id?",
+    message: "What is the employee's role?",
   },
   {
     type: "input",
     name: "manager_id",
-    message: "What is the employee's manager's id?",
+    message: "Who is the employee's manager?",
   },
 ];
 
