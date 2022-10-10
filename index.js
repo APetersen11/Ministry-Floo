@@ -130,13 +130,13 @@ const employeeQ = [
 
 // Start application
 const init = function () {
-  inquirer.prompt(promptQuestions).then((data) => {
+  inquirer.prompt(promptQuestions).then(async (data) => {
     switch (data.startPrompt) {
       case "view_dept":
         viewDepartments();
         break;
       case "add_dept":
-        addDepartment();
+        await addDepartment();
         break;
       case "view_roles":
         viewRoles();
@@ -159,6 +159,8 @@ const init = function () {
       default:
         process.exit();
     }
+
+    init();
   });
 };
 
@@ -171,8 +173,8 @@ function viewDepartments() {
 }
 
 // Add a Department
-function addDepartment() {
-  inquirer.prompt(departmentQ).then((data) => {
+async function addDepartment() {
+  return inquirer.prompt(departmentQ).then((data) => {
     db.addDepartments(data);
   });
 }
